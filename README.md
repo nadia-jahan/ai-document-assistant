@@ -2,6 +2,24 @@
 
 A Retrieval-Augmented Generation (RAG) application that allows users to upload technical documents and ask grounded questions over the document contents using semantic retrieval and LLM-based response generation.
 
+## Project Demo
+
+### FastAPI Swagger Interface
+
+![Swagger Demo](images/swagger-demo.png)
+
+---
+
+### Dockerized Application
+
+![Docker Container](images/docker-container.png)
+
+---
+
+### GitHub Repository
+
+![GitHub Repo](images/github-repo.png)
+
 ## Features
 
 - PDF document upload and parsing
@@ -124,6 +142,38 @@ docker run -p 8000:8000 --env-file .env ai-document-assistant
 ```
 
 ---
+
+## System Architecture
+```text
+                ┌────────────────────┐
+                │   User Question    │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │ FastAPI Backend    │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │ FAISS Vector Store │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │ Relevant Chunks    │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │ OpenAI Generation  │
+                └─────────┬──────────┘
+                          │
+                          ▼
+                ┌────────────────────┐
+                │ Grounded Response  │
+                └────────────────────┘
+```
 
 ## Future Improvements
 
