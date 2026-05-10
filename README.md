@@ -4,6 +4,16 @@ A Retrieval-Augmented Generation (RAG) application that allows users to upload t
 
 ## Project Demo
 
+## Live Deployment
+
+Backend deployed using Google Cloud Run.
+
+### Live API
+https://ai-document-assistant-443504979209.us-central1.run.app
+
+### API Documentation
+https://ai-document-assistant-443504979209.us-central1.run.app/docs
+
 ### FastAPI Swagger Interface
 
 ![Swagger Demo](images/swagger-demo.png)
