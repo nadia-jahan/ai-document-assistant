@@ -7,3 +7,5 @@ python-dotenv
 faiss-cpu
 sentence-transformers
 numpy
+streamlit
+requests

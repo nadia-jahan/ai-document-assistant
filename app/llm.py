@@ -32,4 +32,17 @@ Question:
         temperature=0.2
     )
 
+def generate_non_grounded_answer(query: str) -> str:
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": query
+            }
+        ],
+        temperature=0.2
+    )
+
     return response.choices[0].message.content

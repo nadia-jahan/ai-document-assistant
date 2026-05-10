@@ -1,9 +1,10 @@
 from fastapi import FastAPI, UploadFile, File
 from app.document_loader import extract_text_from_pdf
 from app.chunker import chunk_text
-from app.embeddings import create_embeddings, model
+from app.embeddings import create_embeddings, get_model
 from app.vector_store import VectorStore
 from app.llm import generate_answer
+from app.llm import generate_non_grounded_answer
 
 app = FastAPI()
 
@@ -45,7 +46,7 @@ def search(query: str):
     if vector_store is None:
         return {"error": "No document uploaded"}
 
-    query_embedding = model.encode(query)
+    query_embedding = get_model().encode(query)
 
     results = vector_store.search(query_embedding)
 
@@ -61,7 +62,7 @@ def ask(query: str):
     if vector_store is None:
         return {"error": "No document uploaded"}
 
-    query_embedding = model.encode(query)
+    query_embedding = get_model().encode(query)
 
     retrieved_chunks = vector_store.search(query_embedding)
 
@@ -71,4 +72,14 @@ def ask(query: str):
         "query": query,
         "answer": answer,
         "sources": retrieved_chunks
+    }
+
+@app.get("/ask_non_grounded")
+def ask_non_grounded(query: str):
+
+    answer = generate_non_grounded_answer(query)
+
+    return {
+        "query": query,
+        "answer": answer
     }
